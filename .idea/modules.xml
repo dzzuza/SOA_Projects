@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Soap-connector/Soap-connector.iml" filepath="$PROJECT_DIR$/Soap-connector/Soap-connector.iml" />
+      <module fileurl="file://$PROJECT_DIR$/University.iml" filepath="$PROJECT_DIR$/University.iml" />
+      <module fileurl="file://$PROJECT_DIR$/University-ear/University-ear.iml" filepath="$PROJECT_DIR$/University-ear/University-ear.iml" />
+      <module fileurl="file://$PROJECT_DIR$/University-ejb/University-ejb.iml" filepath="$PROJECT_DIR$/University-ejb/University-ejb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/University-web/University-web.iml" filepath="$PROJECT_DIR$/University-web/University-web.iml" />
+    </modules>
+  </component>
+</project>
