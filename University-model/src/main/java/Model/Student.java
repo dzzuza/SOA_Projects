@@ -1,11 +1,20 @@
-package Service;
+package Model;
+
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
+@XmlRootElement
 public class Student {
-    String name="Ania";
-    Integer id=1;
-    String logo = "D:\\IntelIJProjects\\MavenProjects\\University\\resume.txt";
+    String name;
+    Integer id;
+    public String logo = "D:\\IntelIJProjects\\MavenProjects\\University\\resume.txt";
+    public Student(){}
+    public Student(String name,Integer id){
+        this.name=name;
+        this.id=id;
+
+    }
     private List<Subject> subjects = new ArrayList<>();
 
     public List<Subject> addDefaultSubjects(){

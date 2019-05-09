@@ -1,5 +1,8 @@
-package Service;
+package Model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Subject implements Comparable<Subject> {
     String name;
     Integer ects;

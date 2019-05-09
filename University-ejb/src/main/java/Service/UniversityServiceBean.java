@@ -1,5 +1,7 @@
 package Service;
 
+import Model.Student;
+import Model.Subject;
 import org.jboss.security.annotation.SecurityDomain;
 import org.jboss.ws.api.annotation.WebContext;
 
@@ -71,7 +73,7 @@ public class UniversityServiceBean {
     @WebMethod
     public List<String> getSubjectsAbove5Ects(){
         List<String> subjectsAbove5ects = new ArrayList<>();
-        student.getSubjects().stream().filter(e->e.ects>5).forEach(e->subjectsAbove5ects.add(e.name));
+        student.getSubjects().stream().filter(e->e.getEcts()>5).forEach(e->subjectsAbove5ects.add(e.getName()));
         return subjectsAbove5ects;
     }
 

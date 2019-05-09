@@ -49,6 +49,12 @@
          <scope>provided</scope>
       </dependency>
 
+       <dependency>
+           <groupId>group1</groupId>
+           <artifactId>University-model</artifactId>
+           <version>1.0.0.Final</version>
+       </dependency>
+
       <!-- Import the JAX-RS API, we use provided scope as the API is included in JBoss WildFly -->
       <dependency>
          <groupId>org.jboss.resteasy</groupId>
@@ -90,6 +96,16 @@
                    <artifactId>slf4j-api</artifactId>
                </exclusion>
            </exclusions>
+       </dependency>
+       <dependency>
+           <groupId>org.jboss.resteasy</groupId>
+           <artifactId>jaxrs-api</artifactId>
+           <version>3.0.10.Final</version>
+       </dependency>
+       <dependency>
+           <groupId>org.jboss.resteasy</groupId>
+           <artifactId>jaxrs-api</artifactId>
+           <version>3.0.10.Final</version>
        </dependency>
 
    </dependencies>
