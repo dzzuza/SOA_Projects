@@ -40,6 +40,12 @@
             <artifactId>jboss-jsf-api_2.2_spec</artifactId>
             <version>2.2.8</version>
         </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson-provider</artifactId>
+            <version>3.0.4.Final</version>
+        </dependency>
+
     </dependencies>
     <modelVersion>4.0.0</modelVersion>
     <groupId>group1</groupId>
@@ -113,12 +119,12 @@
                 <type>war</type>
                 <scope>compile</scope>
             </dependency>
-<!--            <dependency>
+            <dependency>
                 <groupId>group1</groupId>
                 <artifactId>RestConnector</artifactId>
                 <version>${project.version}</version>
                 <scope>compile</scope>
-            </dependency>-->
+            </dependency>
             <!-- JBoss distributes a complete set of Java EE 7 APIs including
                 a Bill of Materials (BOM). A BOM specifies the versions of a "stack" (or 
                 a collection) of artifacts. We use this here so that we always get the correct 

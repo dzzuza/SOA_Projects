@@ -6,39 +6,55 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Path("/uni")
+import static javax.ws.rs.core.Response.status;
+
+@Path("/")
 public class RestApplication {
 
     UniversityService service = new UniversityService();
 
     @GET
-    @Path("/echo")
+    @JWTTokenNeeded
+    @Path("/student/{id}")
     @Produces({"application/json"})
-    public Response getEcho(@QueryParam("mess") String msg){
-        return Response.ok("Your message: " + msg).build();
+    public Student studentById(@PathParam("id") Integer id) {
+        if (!service.getAllStudents().isEmpty()) {
+            return service.getStudent(id);
+        } else {
+            return null;
+        }
     }
 
     @GET
-    @Path("/student")
+    @JWTTokenNeeded
+    @Path("getAll")
     @Produces({"application/json"})
-    public Student studentById(@QueryParam("id") String id) {
-        return service.getStudentById(id);
+    public List<Student> getAll() {
+        if (!service.getAllStudents().isEmpty()) {
+            return service.getAllStudents();
+        } else {
+            return null;
+        }
     }
 
-    /*@POST
+    @POST
     @Path("/createStudent")
+    @Consumes({"application/json"})
     @Produces({"application/json"})
-    public Response addSubject(@QueryParam("name") String name, @QueryParam("id") String id){
-
-    }*/
-
+    public Response addStudent(Student student){
+        if(service.getAllStudents().contains(student)){
+            return Response.status(Response.Status.CONFLICT).build();
+        }
+        service.addStudent(student);
+        return Response.status(Response.Status.CREATED.getStatusCode()).build();
+    }
+/*
     @GET
     @Path("/subjects")
-    @Produces({"application/json"})
-    public List<Student> getStudentsSubjects(){
-        return service.getAllStudents();
-    }
 
+    public List<Student> getStudentsSubjects() {
+        return service.getAllStudents();
+    }*/
 
 
 }

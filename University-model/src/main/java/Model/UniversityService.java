@@ -1,20 +1,44 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UniversityService {
 
-    List<Student> list = new ArrayList<>();
-    public List<Student> getAllStudents(){
-        Student ola = new Student("Ola",111);
-        Student tomek = new Student("Tomek",222);
-        list.add(ola);
-        list.add(tomek);
-        return list;
+    public static Map<Integer,Student> students = new HashMap<>();
+
+    public UniversityService(){
+        students.put(1,new Student("Natalia",1));
+        students.put(2,new Student("Zbyszek",2));
     }
 
-    public Student getStudentById(String id){
-        return list.stream().filter(e->e.id.equals(id)).findFirst().get();
+    public List<Student> getAllStudents(){
+        return new ArrayList<>(students.values());
+    }
+
+    public Student addStudent(Student student){
+        Integer id = students.size()+1;
+        student.setId(id);
+        students.put(id,student);
+        return student;
+    }
+
+    public Student getStudent(Integer id){
+        return students.get(id);
+    }
+
+    public Student update(Student student){
+        if(!students.containsKey(student.getId())){
+            return null;
+        }else {
+            students.put(student.getId(),student);
+            return student;
+        }
+    }
+
+    public Student removeStudent(Integer id){
+        return students.remove(id);
     }
 }

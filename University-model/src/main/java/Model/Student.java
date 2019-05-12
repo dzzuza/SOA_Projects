@@ -1,10 +1,18 @@
 package Model;
 
+import org.codehaus.jackson.annotate.JsonTypeName;
+import org.codehaus.jackson.map.annotate.JsonRootName;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
 
-@XmlRootElement
+@JsonRootName("student")
+//@XmlAccessorType(XmlAccessType.FIELD)
+//@XmlType(name = "movie", propOrder = { "name","id"})
 public class Student {
     String name;
     Integer id;
@@ -13,7 +21,10 @@ public class Student {
     public Student(String name,Integer id){
         this.name=name;
         this.id=id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
     }
     private List<Subject> subjects = new ArrayList<>();
 
@@ -40,5 +51,11 @@ public class Student {
 
     public List<Subject> getSubjects() {
         return subjects;
+    }
+
+
+    @Override
+    public String toString() {
+        return new StringBuffer("Student Name: ").append(this.name).append(" Id: ").append(this.id).toString();
     }
 }

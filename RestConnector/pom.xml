@@ -13,6 +13,17 @@
 
     <dependencies>
         <dependency>
+            <groupId>group1</groupId>
+            <artifactId>University-model</artifactId>
+            <version>1.0.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>group1</groupId>
+            <artifactId>University-web</artifactId>
+            <version>1.0.0.Final</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxrs</artifactId>
             <version>3.6.0.Final</version>
@@ -27,6 +38,13 @@
             <artifactId>resteasy-jaxb-provider</artifactId>
             <version>3.6.3.Final</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson-provider</artifactId>
+            <version>3.0.4.Final</version>
+        </dependency>
+
 
     </dependencies>
 </project>
