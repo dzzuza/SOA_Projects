@@ -97,8 +97,6 @@ public class UniversityServiceBean {
             byte[] bytes = new byte[(int)filePath.length()];
             fileInputStreamReader.read(bytes);
             encodedfile = Base64.getEncoder().encodeToString(bytes);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

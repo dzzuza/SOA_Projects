@@ -38,7 +38,9 @@
          <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
       </license>
    </licenses>
-
+    <properties>
+        <protobuf.version>3.3.0</protobuf.version>
+    </properties>
    <dependencies>
 
       <!-- Dependency on the EJB module so we can use it's services if needed -->
@@ -124,6 +126,17 @@
            <artifactId>jjwt</artifactId>
            <version>0.7.0</version>
        </dependency>
+       <dependency>
+           <groupId>com.google.protobuf</groupId>
+           <artifactId>protobuf-java</artifactId>
+           <version>${protobuf.version}</version>
+       </dependency>
+       <dependency>
+           <groupId>commons-lang</groupId>
+           <artifactId>commons-lang</artifactId>
+           <version>2.5</version>
+       </dependency>
+
 
    </dependencies>
 

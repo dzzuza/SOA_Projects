@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+option java_outer_classname = "UniversityProtos";
+
+/*message UniversityService{
+    repeated Student student = 1;
+}*/
+message Student{
+    required string name = 1;
+    required int32 id = 2;
+    repeated Subject subject = 3;
+}
+
+message Subject{
+    required string name =1;
+    required int32 ects =2;
+}

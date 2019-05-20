@@ -18,15 +18,15 @@ public class Student {
     Integer id;
     public String logo = "D:\\IntelIJProjects\\MavenProjects\\University\\resume.txt";
     public Student(){}
+    private List<Subject> subjects = new ArrayList<>();
+
     public Student(String name,Integer id){
         this.name=name;
         this.id=id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
-    private List<Subject> subjects = new ArrayList<>();
 
     public List<Subject> addDefaultSubjects(){
         subjects.add(new Subject("Analiza",7));

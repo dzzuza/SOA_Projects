@@ -28,7 +28,7 @@
     <artifactId>University-ear</artifactId>
     <packaging>ear</packaging>
 
-    <name>University: EAR Module</name>
+    <name>University-ear</name>
 
     <url>http://wildfly.org</url>
     <licenses>
