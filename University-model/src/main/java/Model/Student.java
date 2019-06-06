@@ -1,12 +1,6 @@
 package Model;
 
-import org.codehaus.jackson.annotate.JsonTypeName;
 import org.codehaus.jackson.map.annotate.JsonRootName;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,39 +8,58 @@ import java.util.List;
 //@XmlAccessorType(XmlAccessType.FIELD)
 //@XmlType(name = "movie", propOrder = { "name","id"})
 public class Student {
-    String name;
-    Integer id;
-    public String logo = "D:\\IntelIJProjects\\MavenProjects\\University\\resume.txt";
+    private int studentid;
+    private String name;
+    private String logo;
+
+    //public String logo = "D:\\IntelIJProjects\\MavenProjects\\University\\resume.txt";
+    private List<Subject> subjects=new ArrayList<>();
+
     public Student(){}
-    private List<Subject> subjects = new ArrayList<>();
 
-    public Student(String name,Integer id){
+    public Student(int id,String name,String logo, List<Subject> subjects){
+        this.studentid=id;
         this.name=name;
-        this.id=id;
+        this.logo=logo;
+        this.subjects=subjects;
     }
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public List<Subject> addDefaultSubjects(){
+    /*public List<Subject> addDefaultSubjects(){
         subjects.add(new Subject("Analiza",7));
         subjects.add(new Subject("Algebra",5));
         subjects.add(new Subject("Dyskretna",3));
         return subjects;
-    }
+    }*/
 
-    public List<String> getSubjectNames(){
+    /*public List<String> getSubjectNames(){
         List<String> names = new ArrayList<>();
         subjects.stream().forEach(e->names.add(e.name));
         return names;
+    }*/
+    public String getLogo() {
+        return logo;
     }
 
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
     public String getName() {
         return name;
     }
 
-    public Integer getId() {
-        return id;
+    public int getStudentid() {
+        return studentid;
+    }
+
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStudentid(int studentid) {
+        this.studentid = studentid;
     }
 
     public List<Subject> getSubjects() {
@@ -56,6 +69,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return new StringBuffer("Student Name: ").append(this.name).append(" Id: ").append(this.id).toString();
+        return new StringBuffer("Student Name: ").append(this.name).append(" Id: ").append(this.studentid).toString();
     }
 }

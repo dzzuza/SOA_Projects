@@ -22,7 +22,7 @@ import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 
-@Stateless(name = "UniversityServiceEJB")
+//@Stateless(name = "UniversityServiceEJB")
 @WebService(name = "UniversityService")
 @SecurityDomain("uni")
 @DeclareRoles({"group1"})

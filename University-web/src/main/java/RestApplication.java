@@ -3,6 +3,8 @@ import Model.UniversityFactory;
 import Model.UniversityProtos;
 import Model.UniversityService;
 
+import javax.ejb.EJB;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -11,10 +13,43 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 
-@Path("/")
+@Transactional
+@Path("/service")
 public class RestApplication {
 
     UniversityService service = new UniversityService();
+
+    @EJB
+    private UniversityDao universityDao;
+
+    @POST
+    @Path("/postjpa")
+    @Consumes({"application/json"})
+    @Produces({"application/json"})
+    public Response makeStudent(Student student) {
+        universityDao.create(universityDao.DTOToEntity(student));
+        return Response.status(Response.Status.CREATED.getStatusCode()).build();
+    }
+
+
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getStudent(@PathParam("id") int id) {
+        StudentJPA student = universityDao.get(id);
+        if (student == null) return Response.status(Response.Status.BAD_REQUEST).entity("Student with provided id doesn't exist.").build();
+        return Response.ok(universityDao.EntityToDTO(student)).build();
+    }
+
+    @GET
+    @Path("/getJpa")
+    @Produces({"application/json"})
+    public Response getStudents() {
+        List<StudentJPA> studentJPAS = universityDao.list();
+        if (studentJPAS == null) return Response.status(Response.Status.BAD_REQUEST).entity("There are no students in DB.").build();
+        List<Student> students = universityDao.EntityToDTO(studentJPAS);
+        return Response.ok(students).build();
+    }
 
     @GET
     @JWTTokenNeeded

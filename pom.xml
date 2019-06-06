@@ -65,8 +65,10 @@
         <module>University-model</module>
         <module>University-web</module>
         <module>University-ear</module>
-        <module>University-ejb</module>
+        <!--<module>University-ejb</module>-->
         <module>RestConnector</module>
+        <module>University-jpa</module>
+        <module>University-dao</module>
     </modules>
 
     <properties>

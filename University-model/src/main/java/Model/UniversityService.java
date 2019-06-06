@@ -10,8 +10,8 @@ public class UniversityService {
     public static Map<Integer,Student> students = new HashMap<>();
 
     public UniversityService(){
-        students.put(1,new Student("Natalia",1));
-        students.put(2,new Student("Zbyszek",2));
+        /*students.put(1,new Student("Natalia",1));
+        students.put(2,new Student("Zbyszek",2));*/
     }
 
     public List<Student> getAllStudents(){
@@ -20,7 +20,7 @@ public class UniversityService {
 
     public Student addStudent(Student student){
         Integer id = students.size()+1;
-        student.setId(id);
+        student.setStudentid(id);
         students.put(id,student);
         return student;
     }
@@ -30,10 +30,10 @@ public class UniversityService {
     }
 
     public Student update(Student student){
-        if(!students.containsKey(student.getId())){
+        if(!students.containsKey(student.getStudentid())){
             return null;
         }else {
-            students.put(student.getId(),student);
+            students.put(student.getStudentid(),student);
             return student;
         }
     }

@@ -11,10 +11,12 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Form;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import java.io.*;
+import java.util.List;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
@@ -22,6 +24,42 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 public class RestCli {
 
     public static void main(String[] args) throws IOException {
+        UniversityService university = new UniversityService();
+        Client client = ClientBuilder.newClient();
+        //getAll
+        WebTarget target1 = client.target("http://localhost:8080/University-web/rest/service/postjpa");
+        WebTarget target2 = client.target("http://localhost:8080/University-web/rest/service/getJpa");
+        /*StudentJPA student = new StudentJPA();
+        student.setId(11);
+        student.setName("Roman");*/
+        Response response1 = target2.request().get();
+
+
+        Student[] st = response1.readEntity(Student[].class);
+
+        for (Student s : st) {
+            System.out.println("xxx: " + s.toString());
+            //university.getAllStudents().add(s);
+        }
+
+        response1.close();
+
+        /*Student[] students = getStudents();
+        for (Student s : students) {
+            System.out.println(s.toString());
+        }*/
+    }
+/*        private static Student[] getStudents () {
+            Client client = ClientBuilder.newClient();
+            WebTarget target = client.target("http://localhost:8080/University-web/rest/service/getAll");
+            Response response = target.request().get();
+            Student[] students = response.readEntity(Student[].class);
+            //List<Student> students = response.readEntity(new GenericType<List<Student>>() {});
+            response.close();
+            return students;
+        }*/
+
+/*
         UniversityService university = new UniversityService();
         Client client = ClientBuilder.newClient();
         //logowanie
@@ -86,9 +124,11 @@ public class RestCli {
         WebTarget target3 = client.target("http://localhost:8080/University-web/rest/proto");
         InputStream studentBytes = target3.request().header("accepted", MediaType.APPLICATION_OCTET_STREAM)
                 .get(InputStream.class);
+*/
 /*        Response response3 = target3.request()
                 .header("accepted", MediaType.APPLICATION_OCTET_STREAM)
-                .get();*/
+                .get();*//*
+
         UniversityProtos.Student student = UniversityProtos.Student.parseFrom(IOUtils.toByteArray(studentBytes));
         //byte[] studentProto = response3.readEntity(byte[].class);
         System.out.println("ProtoBuf :\n"+ student);
@@ -96,5 +136,6 @@ public class RestCli {
         UniversityFactory.displayProto(student);
         //response3.close();
     }
+*/
 
 }
