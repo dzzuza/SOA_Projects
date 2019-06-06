@@ -58,6 +58,22 @@ public class StudentJPA {
     public void setSubjects(List<SubjectJPA> subjects) {
         this.subjects = subjects;
     }
+
+    public int getStudentid() {
+        return studentid;
+    }
+
+    public void setStudentid(int studentid) {
+        this.studentid = studentid;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
 /*    public List<SubjectJPA> addDefaultSubjects() {
         subjects.add(new SubjectJPA("Analiza", 7));
         subjects.add(new SubjectJPA("Algebra", 5));
