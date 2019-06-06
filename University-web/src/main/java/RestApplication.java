@@ -1,7 +1,4 @@
-import Model.Student;
-import Model.UniversityFactory;
-import Model.UniversityProtos;
-import Model.UniversityService;
+import Model.*;
 
 import javax.ejb.EJB;
 import javax.transaction.Transactional;
@@ -21,6 +18,15 @@ public class RestApplication {
 
     @EJB
     private UniversityDao universityDao;
+
+    @POST
+    @Path("/postprof")
+    @Consumes({"application/json"})
+    @Produces({"application/json"})
+    public Response makeProfesor(Profesor profesor) {
+        universityDao.create(universityDao.DTOToEntity(profesor));
+        return Response.status(Response.Status.CREATED.getStatusCode()).build();
+    }
 
     @POST
     @Path("/postjpa")
@@ -45,7 +51,7 @@ public class RestApplication {
     @Path("/getJpa")
     @Produces({"application/json"})
     public Response getStudents() {
-        List<StudentJPA> studentJPAS = universityDao.list();
+        List<StudentJPA> studentJPAS = universityDao.list(0,10);
         if (studentJPAS == null) return Response.status(Response.Status.BAD_REQUEST).entity("There are no students in DB.").build();
         List<Student> students = universityDao.EntityToDTO(studentJPAS);
         return Response.ok(students).build();

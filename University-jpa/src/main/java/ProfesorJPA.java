@@ -14,12 +14,17 @@ public class ProfesorJPA {
     @Column(name = "profesor_name")
     private String name;
 
+    public int getProfesorid() {
+        return profesorid;
+    }
+
+    public void setProfesorid(int profesorid) {
+        this.profesorid = profesorid;
+    }
+
     @OneToMany(mappedBy = "profesor")
     private List<SubjectJPA> subjects= new ArrayList<SubjectJPA>();
 
-    public void setId(int id) {
-        profesorid = id;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -27,10 +32,6 @@ public class ProfesorJPA {
 
     public void setSubjects(List<SubjectJPA> subjects) {
         this.subjects = subjects;
-    }
-
-    public int getId() {
-        return profesorid;
     }
 
     public String getName() {

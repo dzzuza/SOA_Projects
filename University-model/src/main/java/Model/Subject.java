@@ -1,23 +1,25 @@
 package Model;
 
+import org.codehaus.jackson.map.annotate.JsonRootName;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Subject implements Comparable<Subject> {
-    int subjectid;
-    String name;
-    int ects;
-
+    private int subjectid;
+    private String name;
+    private int ects;
+    private Profesor profesor;
 
     public Subject() {
     }
 
-    public Subject(int subjectid, String name, int ects){
+    /*public Subject(int subjectid, String name, int ects){
         this.subjectid=subjectid;
         this.name=name;
         this.ects=ects;
     }
-
+*/
     public String getName() {
         return name;
     }
@@ -40,6 +42,14 @@ public class Subject implements Comparable<Subject> {
 
     public int getSubjectid() {
         return subjectid;
+    }
+
+    public Profesor getProfesor() {
+        return profesor;
+    }
+
+    public void setProfesor(Profesor profesor) {
+        this.profesor = profesor;
     }
 
     @Override

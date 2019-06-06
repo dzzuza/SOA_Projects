@@ -1,6 +1,5 @@
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "subjectjpa")
@@ -17,22 +16,38 @@ public class SubjectJPA {
     @Column(name = "ects")
     int ects;
 
-    public void setStudents(List<StudentJPA> students) {
+    public void setStudents(Set<StudentJPA> students) {
         this.students = students;
     }
 
-    public List<StudentJPA> getStudents() {
+    public Set<StudentJPA> getStudents() {
         return students;
     }
 
     @ManyToMany(mappedBy = "subjects")
-    private List<StudentJPA> students = new ArrayList<StudentJPA>();
+    private Set<StudentJPA> students;
 
     @ManyToOne
     @JoinColumn(name = "profesor_id")
     private ProfesorJPA profesor;
 
     public SubjectJPA() {
+    }
+
+    public int getSubjectid() {
+        return subjectid;
+    }
+
+    public void setSubjectid(int subjectid) {
+        this.subjectid = subjectid;
+    }
+
+    public ProfesorJPA getProfesor() {
+        return profesor;
+    }
+
+    public void setProfesor(ProfesorJPA profesor) {
+        this.profesor = profesor;
     }
 
     public SubjectJPA(Integer subjectid, String name, Integer ects) {
@@ -46,17 +61,10 @@ public class SubjectJPA {
         this.ects = ects;
     }
 
-    public int getId() {
-        return subjectid;
-    }
-
-    public void setId(int id) {
-        this.subjectid = id;
-    }
-
     public int getEcts() {
         return ects;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -64,7 +72,5 @@ public class SubjectJPA {
     public String getName() {
         return name;
     }
-
-
 
 }

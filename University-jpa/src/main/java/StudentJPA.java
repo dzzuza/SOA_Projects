@@ -3,6 +3,7 @@ import javax.security.auth.Subject;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "studentjpa")
@@ -22,13 +23,13 @@ public class StudentJPA {
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "student_subject", joinColumns = {
             @JoinColumn(name = "student_id")}, inverseJoinColumns = {@JoinColumn(name = "subject_id")})
-    private List<SubjectJPA> subjects=new ArrayList<SubjectJPA>();
+    private Set<SubjectJPA> subjects;
 
 
     public StudentJPA() {
     }
 
-    public StudentJPA(Integer studentid, String name, String logo, List<SubjectJPA> subjects) {
+    public StudentJPA(Integer studentid, String name, String logo, Set<SubjectJPA> subjects) {
         this.studentid = studentid;
         this.name = name;
         this.logo=logo;
@@ -51,11 +52,11 @@ public class StudentJPA {
         this.name = name;
     }
 
-    public List<SubjectJPA> getSubjects() {
+    public Set<SubjectJPA> getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(List<SubjectJPA> subjects) {
+    public void setSubjects(Set<SubjectJPA> subjects) {
         this.subjects = subjects;
     }
 

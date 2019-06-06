@@ -63,21 +63,23 @@ public abstract class AbstractDao {
         }
     }
 
+/*
     public List<StudentJPA> list() {
         getLogger().info("list - invoked");
         TypedQuery<StudentJPA> query = entityManager.createQuery("select s from StudentJPA s",StudentJPA.class);
         return query.getResultList();
     }
+*/
 
-/*    public <T> List<T> list() {
+    public <T> List<T> list(int offset, int limit) {
         getLogger().info("list - invoked");
         final CriteriaQuery<T> criteriaQuery = entityManager.getCriteriaBuilder().createQuery(getType());
         System.out.println(getType().toString());
         criteriaQuery.from(getType());
         final TypedQuery<T> query = entityManager.createQuery(criteriaQuery);
-        //query.setFirstResult(offset).setMaxResults(limit);
+        query.setFirstResult(offset).setMaxResults(limit);
         return query.getResultList();
-    }*/
+    }
 
 
     protected abstract Logger getLogger();

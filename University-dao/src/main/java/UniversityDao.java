@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import Model.Profesor;
 import Model.Student;
 import org.modelmapper.ModelMapper;
 
@@ -15,6 +16,12 @@ public class UniversityDao extends AbstractDao {
         ModelMapper modelMapper = new ModelMapper();
         return studentsJPA.stream().map(s -> modelMapper.map(s, Student.class)).collect(Collectors.toList());
     }
+
+    public ProfesorJPA DTOToEntity(Profesor profesor){
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(profesor, ProfesorJPA.class);
+    }
+
     public StudentJPA DTOToEntity(Student student){
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(student, StudentJPA.class);
