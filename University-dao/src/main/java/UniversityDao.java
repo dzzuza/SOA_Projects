@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import Model.Subject;
+import com.sun.xml.internal.bind.v2.TODO;
 import org.hibernate.Criteria;
 import Model.Profesor;
 import Model.Student;
@@ -39,12 +40,45 @@ public class UniversityDao extends AbstractDao {
         return entityManager.createQuery(query).getResultList();
     }
 
+    public List<SubjectJPA> filterByStudent(Integer studentId){
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<SubjectJPA> query = builder.createQuery(SubjectJPA.class);
+        Root<SubjectJPA> root = query.from(SubjectJPA.class);
+
+        Join<SubjectJPA, StudentJPA> join = root.join(SubjectJPA_.students);
+        query.where(builder.equal(join.get(StudentJPA_.studentid),studentId));
+        query.distinct(true);
+
+        return entityManager.createQuery(query).getResultList();
+    }
+
+    //TODO filter subjects by profesor, rest done, uncomment
+/*
+    public List<SubjectJPA> filterByProfesor(Integer profesorId){
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<SubjectJPA> query = builder.createQuery(SubjectJPA.class);
+        Root<SubjectJPA> root = query.from(SubjectJPA.class);
+
+        Join<SubjectJPA, StudentJPA> join = root.join(SubjectJPA_.students);
+        query.where(builder.equal(join.get(StudentJPA_.studentid),studentId));
+        query.distinct(true);
+
+        return entityManager.createQuery(query).getResultList();
+    }
+*/
+
     private static final Logger LOGGER = Logger.getLogger("Soa" + UniversityDao.class.toString());
 
-    public List<Student> EntityToDTO(List<StudentJPA> studentsJPA){
+    public List<Student> StudentListToDTO(List<StudentJPA> studentsJPA){
         ModelMapper modelMapper = new ModelMapper();
         return studentsJPA.stream().map(s -> modelMapper.map(s, Student.class)).collect(Collectors.toList());
     }
+
+    public List<Subject> SubjectListToDTO(List<SubjectJPA> subjectJPAS){
+        ModelMapper modelMapper = new ModelMapper();
+        return subjectJPAS.stream().map(s -> modelMapper.map(s, Subject.class)).collect(Collectors.toList());
+    }
+
 
 /*    public ProfesorJPA DTOToEntity(Profesor profesor){
         ModelMapper modelMapper = new ModelMapper();
@@ -55,7 +89,7 @@ public class UniversityDao extends AbstractDao {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(student, StudentJPA.class);
     }
-    public Student EntityToDTO(StudentJPA studentJPA){
+    public Student StudentToDTO(StudentJPA studentJPA){
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(studentJPA, Student.class);
     }

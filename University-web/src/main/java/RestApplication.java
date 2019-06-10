@@ -1,7 +1,6 @@
 import Model.*;
 
 import javax.ejb.EJB;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -10,7 +9,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
-import java.util.Optional;
 
 @Transactional
 @Path("/service")
@@ -39,6 +37,17 @@ public class RestApplication {
         return Response.status(Response.Status.CREATED.getStatusCode()).build();
     }
 
+    /*@PUT
+    @Path("/putsubject{studentid}")
+    @Consumes({"application/json"})
+    @Produces({"application/json"})
+    public Response makeStudent(@PathParam("studentid")Integer studentid, Subject subject) {
+        StudentJPA studentJPA = universityDao.get(studentid);
+        if (studentJPA == null) return Response.status(Response.Status.BAD_REQUEST).entity("Student with provided id doesn't exist.").build();
+        studentJPA.getSubjects().add(subject);
+        universityDao.update()
+        return Response.status(Response.Status.OK.getStatusCode()).build();
+    }*/
 
     @GET
     @Path("/{id}")
@@ -46,7 +55,7 @@ public class RestApplication {
     public Response getStudent(@PathParam("id") Integer id) {
         StudentJPA student = universityDao.get(id);
         if (student == null) return Response.status(Response.Status.BAD_REQUEST).entity("Student with provided id doesn't exist.").build();
-        return Response.ok(universityDao.EntityToDTO(student)).build();
+        return Response.ok(universityDao.StudentToDTO(student)).build();
     }
 
     @GET
@@ -55,26 +64,19 @@ public class RestApplication {
     public Response getStudents() {
         List<StudentJPA> studentJPAS = universityDao.list(0,10);
         if (studentJPAS == null) return Response.status(Response.Status.BAD_REQUEST).entity("There are no students in DB.").build();
-        List<Student> students = universityDao.EntityToDTO(studentJPAS);
+        List<Student> students = universityDao.StudentListToDTO(studentJPAS);
         return Response.ok(students).build();
     }
 
-/*
     @GET
-    @Path("/filter")
-    @Produces(MediaType.APPLICATION_JSON)
-*/
-
-
-    @GET
-    @Path("/filter")
+    @Path("/byname")
     @Produces(MediaType.APPLICATION_JSON)
     public Response filter(@QueryParam("name") String name) {
         List<StudentJPA> studentsByName,allStudents;
         allStudents = universityDao.list(0,100);
         studentsByName = (name == null) ? allStudents : universityDao.filterByName(name);
         allStudents.retainAll(studentsByName);
-        List<Student> students = universityDao.EntityToDTO(studentsByName);
+        List<Student> students = universityDao.StudentListToDTO(studentsByName);
         if (studentsByName.size() != 0) return Response.ok(students).build();
         return Response.status(Response.Status.BAD_REQUEST).entity("Student with provided name doesn't exist.").build();
     }
@@ -87,10 +89,36 @@ public class RestApplication {
         allStudents = universityDao.list(0,100);
         studentsBySub = (subj == null) ? allStudents : universityDao.filterBySubject(subj);
         allStudents.retainAll(studentsBySub);
-        List<Student> students = universityDao.EntityToDTO(studentsBySub);
+        List<Student> students = universityDao.StudentListToDTO(studentsBySub);
         if (studentsBySub.size() != 0) return Response.ok(students).build();
-        return Response.status(Response.Status.BAD_REQUEST).entity("Student with provided name doesn't exist.").build();
+        return Response.status(Response.Status.BAD_REQUEST).entity("No subject like that").build();
     }
+
+    @GET
+    @Path("/subjectbystudent")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response filterByStudent(@QueryParam("student") Integer student) {
+        List<SubjectJPA> subjectByStudent;
+        List<SubjectJPA> allSubjects = universityDao.list(0,100);
+        subjectByStudent = (student == null) ? allSubjects : universityDao.filterByStudent(student);
+        allSubjects.retainAll(subjectByStudent);
+        List<Subject> subjects = universityDao.SubjectListToDTO(subjectByStudent);
+        if (subjectByStudent.size() != 0) return Response.ok(subjects).build();
+        return Response.status(Response.Status.BAD_REQUEST).entity("Cannot find students for this subject Id").build();
+    }
+
+/*    @GET
+    @Path("/subjectbyprofesor")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response filterByProfesor(@QueryParam("profesor") Integer profesor) {
+        List<SubjectJPA> subjectByProf;
+        List<SubjectJPA> allSubjects = universityDao.list(0,100);
+        subjectByProf = (profesor == null) ? allSubjects : universityDao.filterByProfesor(profesor);
+        allSubjects.retainAll(subjectByProf);
+        List<Subject> subjects = universityDao.SubjectListToDTO(subjectByProf);
+        if (subjectByProf.size() != 0) return Response.ok(subjects).build();
+        return Response.status(Response.Status.BAD_REQUEST).entity("Cannot find subject for this profesor").build();
+    }*/
 
     @GET
     @JWTTokenNeeded
