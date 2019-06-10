@@ -78,7 +78,7 @@
         </dependency>
 
 
-        <!-- Test scope dependencies -->
+        <!-- agh.edu.Test scope dependencies -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

@@ -1,3 +1,5 @@
+package agh.edu;
+
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
@@ -64,9 +66,9 @@ public abstract class AbstractDao {
     }
 
 /*
-    public List<StudentJPA> list() {
+    public List<agh.edu.StudentJPA> list() {
         getLogger().info("list - invoked");
-        TypedQuery<StudentJPA> query = entityManager.createQuery("select s from StudentJPA s",StudentJPA.class);
+        TypedQuery<agh.edu.StudentJPA> query = entityManager.createQuery("select s from agh.edu.StudentJPA s",agh.edu.StudentJPA.class);
         return query.getResultList();
     }
 */

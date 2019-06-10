@@ -1,16 +1,14 @@
+package agh.edu;
+
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import Model.Subject;
-import com.sun.xml.internal.bind.v2.TODO;
-import org.hibernate.Criteria;
-import Model.Profesor;
 import Model.Student;
 import org.modelmapper.ModelMapper;
 @Transactional
@@ -33,7 +31,7 @@ public class UniversityDao extends AbstractDao {
         CriteriaQuery<StudentJPA> query = builder.createQuery(StudentJPA.class);
         Root<StudentJPA> root = query.from(StudentJPA.class);
 
-        Join<StudentJPA,SubjectJPA> join = root.join(StudentJPA_.subjects);
+        Join<StudentJPA, SubjectJPA> join = root.join(StudentJPA_.subjects);
         query.where(builder.equal(join.get(SubjectJPA_.subjectid),subjectId));
         query.distinct(true);
 
@@ -54,13 +52,13 @@ public class UniversityDao extends AbstractDao {
 
     //TODO filter subjects by profesor, rest done, uncomment
 /*
-    public List<SubjectJPA> filterByProfesor(Integer profesorId){
+    public List<agh.edu.SubjectJPA> filterByProfesor(Integer profesorId){
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<SubjectJPA> query = builder.createQuery(SubjectJPA.class);
-        Root<SubjectJPA> root = query.from(SubjectJPA.class);
+        CriteriaQuery<agh.edu.SubjectJPA> query = builder.createQuery(agh.edu.SubjectJPA.class);
+        Root<agh.edu.SubjectJPA> root = query.from(agh.edu.SubjectJPA.class);
 
-        Join<SubjectJPA, StudentJPA> join = root.join(SubjectJPA_.students);
-        query.where(builder.equal(join.get(StudentJPA_.studentid),studentId));
+        Join<agh.edu.SubjectJPA, agh.edu.StudentJPA> join = root.join(agh.edu.SubjectJPA_.students);
+        query.where(builder.equal(join.get(agh.edu.StudentJPA_.studentid),studentId));
         query.distinct(true);
 
         return entityManager.createQuery(query).getResultList();
@@ -80,9 +78,9 @@ public class UniversityDao extends AbstractDao {
     }
 
 
-/*    public ProfesorJPA DTOToEntity(Profesor profesor){
+/*    public agh.edu.ProfesorJPA DTOToEntity(Profesor profesor){
         ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(profesor, ProfesorJPA.class);
+        return modelMapper.map(profesor, agh.edu.ProfesorJPA.class);
     }*/
 
     public StudentJPA DTOToEntity(Student student){

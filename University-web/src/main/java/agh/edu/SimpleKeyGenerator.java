@@ -1,3 +1,5 @@
+package agh.edu;
+
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 

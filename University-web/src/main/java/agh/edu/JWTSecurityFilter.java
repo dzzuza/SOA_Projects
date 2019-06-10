@@ -1,3 +1,5 @@
+package agh.edu;
+
 import io.jsonwebtoken.Jwts;
 
 import javax.annotation.Priority;

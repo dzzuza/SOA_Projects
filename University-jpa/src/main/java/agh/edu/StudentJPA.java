@@ -1,9 +1,7 @@
+package agh.edu;
+
 import javax.persistence.*;
-import javax.security.auth.Subject;
-import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "studentjpa")
@@ -75,10 +73,10 @@ public class StudentJPA {
     public void setLogo(String logo) {
         this.logo = logo;
     }
-/*    public List<SubjectJPA> addDefaultSubjects() {
-        subjects.add(new SubjectJPA("Analiza", 7));
-        subjects.add(new SubjectJPA("Algebra", 5));
-        subjects.add(new SubjectJPA("Dyskretna", 3));
+/*    public List<agh.edu.SubjectJPA> addDefaultSubjects() {
+        subjects.add(new agh.edu.SubjectJPA("Analiza", 7));
+        subjects.add(new agh.edu.SubjectJPA("Algebra", 5));
+        subjects.add(new agh.edu.SubjectJPA("Dyskretna", 3));
         return subjects;
     }*/
 

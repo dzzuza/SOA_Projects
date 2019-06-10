@@ -1,4 +1,10 @@
+package agh.edu;
+
 import Model.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 import javax.ejb.EJB;
 import javax.transaction.Transactional;
@@ -10,8 +16,10 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 
+
 @Transactional
 @Path("/service")
+@Api(value = "RestService")
 public class RestApplication {
 
     UniversityService service = new UniversityService();
@@ -19,19 +27,15 @@ public class RestApplication {
     @EJB
     private UniversityDao universityDao;
 
-/*    @POST
-    @Path("/postprof")
-    @Consumes({"application/json"})
-    @Produces({"application/json"})
-    public Response makeProfesor(Profesor profesor) {
-        universityDao.create(universityDao.DTOToEntity(profesor));
-        return Response.status(Response.Status.CREATED.getStatusCode()).build();
-    }*/
 
     @POST
     @Path("/postjpa")
     @Consumes({"application/json"})
     @Produces({"application/json"})
+    @ApiOperation(value = "make student")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Student created",response = Response.class)
+    })
     public Response makeStudent(Student student) {
         universityDao.create(universityDao.DTOToEntity(student));
         return Response.status(Response.Status.CREATED.getStatusCode()).build();
@@ -42,7 +46,7 @@ public class RestApplication {
     @Consumes({"application/json"})
     @Produces({"application/json"})
     public Response makeStudent(@PathParam("studentid")Integer studentid, Subject subject) {
-        StudentJPA studentJPA = universityDao.get(studentid);
+        agh.edu.StudentJPA studentJPA = universityDao.get(studentid);
         if (studentJPA == null) return Response.status(Response.Status.BAD_REQUEST).entity("Student with provided id doesn't exist.").build();
         studentJPA.getSubjects().add(subject);
         universityDao.update()
@@ -111,8 +115,8 @@ public class RestApplication {
     @Path("/subjectbyprofesor")
     @Produces(MediaType.APPLICATION_JSON)
     public Response filterByProfesor(@QueryParam("profesor") Integer profesor) {
-        List<SubjectJPA> subjectByProf;
-        List<SubjectJPA> allSubjects = universityDao.list(0,100);
+        List<agh.edu.SubjectJPA> subjectByProf;
+        List<agh.edu.SubjectJPA> allSubjects = universityDao.list(0,100);
         subjectByProf = (profesor == null) ? allSubjects : universityDao.filterByProfesor(profesor);
         allSubjects.retainAll(subjectByProf);
         List<Subject> subjects = universityDao.SubjectListToDTO(subjectByProf);

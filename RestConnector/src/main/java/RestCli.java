@@ -29,7 +29,7 @@ public class RestCli {
         //getAll
         WebTarget target1 = client.target("http://localhost:8080/University-web/rest/service/postjpa");
         WebTarget target2 = client.target("http://localhost:8080/University-web/rest/service/getJpa");
-        /*StudentJPA student = new StudentJPA();
+        /*agh.edu.StudentJPA student = new agh.edu.StudentJPA();
         student.setId(11);
         student.setName("Roman");*/
         Response response1 = target2.request().get();
