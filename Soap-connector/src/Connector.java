@@ -22,7 +22,7 @@ public class Connector {
         serviceStub.addSubject("Fizyka", 5);
         serviceStub.addSubject("Lingwistyka", 4);
 
-        int subjectsNUmber = serviceStub.countStudentSubjects();
+        Integer subjectsNUmber = serviceStub.countStudentSubjects();
         System.out.println(subjectsNUmber);
         GetAllStudentSubjectsByNameResponse.SubjectsByName mySubjects = serviceStub.getAllStudentSubjectsByName();
         System.out.println("Posortowana alfabetycznie lista przedmiotow:");

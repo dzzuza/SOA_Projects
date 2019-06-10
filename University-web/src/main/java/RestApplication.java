@@ -43,7 +43,7 @@ public class RestApplication {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getStudent(@PathParam("id") int id) {
+    public Response getStudent(@PathParam("id") Integer id) {
         StudentJPA student = universityDao.get(id);
         if (student == null) return Response.status(Response.Status.BAD_REQUEST).entity("Student with provided id doesn't exist.").build();
         return Response.ok(universityDao.EntityToDTO(student)).build();

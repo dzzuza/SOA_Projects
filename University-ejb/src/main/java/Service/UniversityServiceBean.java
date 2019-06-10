@@ -62,7 +62,7 @@ public class UniversityServiceBean {
     @WebResult(name = "subjectsCounted")
     @PermitAll
     @WebMethod
-    public int countStudentSubjects(){
+    public Integer countStudentSubjects(){
         return student.getSubjects().size();
     }
 

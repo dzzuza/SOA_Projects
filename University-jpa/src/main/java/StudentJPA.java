@@ -10,9 +10,9 @@ import java.util.Set;
 public class StudentJPA {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "student_id")
-    private int studentid;
+    private Integer studentid;
 
     @Column(name = "student_name")
     private String name;
@@ -40,11 +40,11 @@ public class StudentJPA {
         return name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return studentid;
     }
 
-    public void setId(int studentid) {
+    public void setId(Integer studentid) {
         this.studentid = studentid;
     }
 
@@ -60,11 +60,11 @@ public class StudentJPA {
         this.subjects = subjects;
     }
 
-    public int getStudentid() {
+    public Integer getStudentid() {
         return studentid;
     }
 
-    public void setStudentid(int studentid) {
+    public void setStudentid(Integer studentid) {
         this.studentid = studentid;
     }
 

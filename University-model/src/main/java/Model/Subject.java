@@ -6,9 +6,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Subject implements Comparable<Subject> {
-    private int subjectid;
+    private Integer subjectid;
     private String name;
-    private int ects;
+    private Integer ects;
     private Profesor profesor;
 
     public Subject() {
@@ -28,7 +28,7 @@ public class Subject implements Comparable<Subject> {
         return ects;
     }
 
-    public void setSubjectid(int subjectid) {
+    public void setSubjectid(Integer subjectid) {
         this.subjectid = subjectid;
     }
 
@@ -40,7 +40,7 @@ public class Subject implements Comparable<Subject> {
         this.ects = ects;
     }
 
-    public int getSubjectid() {
+    public Integer getSubjectid() {
         return subjectid;
     }
 

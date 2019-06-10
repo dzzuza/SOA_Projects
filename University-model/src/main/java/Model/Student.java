@@ -8,7 +8,7 @@ import java.util.List;
 //@XmlAccessorType(XmlAccessType.FIELD)
 //@XmlType(name = "movie", propOrder = { "name","id"})
 public class Student {
-    private int studentid;
+    private Integer studentid;
     private String name;
     private String logo;
 
@@ -17,7 +17,7 @@ public class Student {
 
     public Student(){}
 
-    public Student(int id,String name,String logo, List<Subject> subjects){
+    public Student(Integer id,String name,String logo, List<Subject> subjects){
         this.studentid=id;
         this.name=name;
         this.logo=logo;
@@ -46,7 +46,7 @@ public class Student {
         return name;
     }
 
-    public int getStudentid() {
+    public Integer getStudentid() {
         return studentid;
     }
 
@@ -58,7 +58,7 @@ public class Student {
         this.name = name;
     }
 
-    public void setStudentid(int studentid) {
+    public void setStudentid(Integer studentid) {
         this.studentid = studentid;
     }
 

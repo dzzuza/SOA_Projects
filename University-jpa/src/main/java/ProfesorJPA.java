@@ -10,15 +10,15 @@ public class ProfesorJPA {
     @Id
     @GeneratedValue
     @Column(name = "profesor_id")
-    private int profesorid;
+    private Integer profesorid;
     @Column(name = "profesor_name")
     private String name;
 
-    public int getProfesorid() {
+    public Integer getProfesorid() {
         return profesorid;
     }
 
-    public void setProfesorid(int profesorid) {
+    public void setProfesorid(Integer profesorid) {
         this.profesorid = profesorid;
     }
 

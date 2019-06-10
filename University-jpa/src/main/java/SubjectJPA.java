@@ -7,15 +7,15 @@ import java.util.Set;
 public class SubjectJPA {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "subject_id")
-    int subjectid;
+    Integer subjectid;
 
     @Column(name = "subject_name")
     String name;
 
     @Column(name = "ects")
-    int ects;
+    Integer ects;
 
     public void setStudents(List<StudentJPA> students) {
         this.students = students;
@@ -35,11 +35,11 @@ public class SubjectJPA {
     public SubjectJPA() {
     }
 
-    public int getSubjectid() {
+    public Integer getSubjectid() {
         return subjectid;
     }
 
-    public void setSubjectid(int subjectid) {
+    public void setSubjectid(Integer subjectid) {
         this.subjectid = subjectid;
     }
 
@@ -58,11 +58,11 @@ public class SubjectJPA {
     }
 
 
-    public void setEcts(int ects) {
+    public void setEcts(Integer ects) {
         this.ects = ects;
     }
 
-    public int getEcts() {
+    public Integer getEcts() {
         return ects;
     }
 

@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Set;
 
 public class Profesor {
-    private int profesorid;
+    private Integer profesorid;
     private String name;
 
     public Profesor() {
     }
 
-    public Profesor(int profesorid, String name) {
+    public Profesor(Integer profesorid, String name) {
         this.profesorid = profesorid;
         this.name = name;
     }
@@ -24,11 +24,11 @@ public class Profesor {
         return name;
     }
 
-    public int getProfesorid() {
+    public Integer getProfesorid() {
         return profesorid;
     }
 
-    public void setProfesorid(int profesorid) {
+    public void setProfesorid(Integer profesorid) {
         this.profesorid = profesorid;
     }
 }
