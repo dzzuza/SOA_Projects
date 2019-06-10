@@ -1,6 +1,7 @@
 import Model.*;
 
 import javax.ejb.EJB;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -9,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Path("/service")
@@ -19,14 +21,14 @@ public class RestApplication {
     @EJB
     private UniversityDao universityDao;
 
-    @POST
+/*    @POST
     @Path("/postprof")
     @Consumes({"application/json"})
     @Produces({"application/json"})
     public Response makeProfesor(Profesor profesor) {
         universityDao.create(universityDao.DTOToEntity(profesor));
         return Response.status(Response.Status.CREATED.getStatusCode()).build();
-    }
+    }*/
 
     @POST
     @Path("/postjpa")
@@ -55,6 +57,39 @@ public class RestApplication {
         if (studentJPAS == null) return Response.status(Response.Status.BAD_REQUEST).entity("There are no students in DB.").build();
         List<Student> students = universityDao.EntityToDTO(studentJPAS);
         return Response.ok(students).build();
+    }
+
+/*
+    @GET
+    @Path("/filter")
+    @Produces(MediaType.APPLICATION_JSON)
+*/
+
+
+    @GET
+    @Path("/filter")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response filter(@QueryParam("name") String name) {
+        List<StudentJPA> studentsByName,allStudents;
+        allStudents = universityDao.list(0,100);
+        studentsByName = (name == null) ? allStudents : universityDao.filterByName(name);
+        allStudents.retainAll(studentsByName);
+        List<Student> students = universityDao.EntityToDTO(studentsByName);
+        if (studentsByName.size() != 0) return Response.ok(students).build();
+        return Response.status(Response.Status.BAD_REQUEST).entity("Student with provided name doesn't exist.").build();
+    }
+
+    @GET
+    @Path("/bysubject")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response filterBySub(@QueryParam("subj") Integer subj) {
+        List<StudentJPA> studentsBySub,allStudents;
+        allStudents = universityDao.list(0,100);
+        studentsBySub = (subj == null) ? allStudents : universityDao.filterBySubject(subj);
+        allStudents.retainAll(studentsBySub);
+        List<Student> students = universityDao.EntityToDTO(studentsBySub);
+        if (studentsBySub.size() != 0) return Response.ok(students).build();
+        return Response.status(Response.Status.BAD_REQUEST).entity("Student with provided name doesn't exist.").build();
     }
 
     @GET
@@ -126,6 +161,8 @@ public class RestApplication {
         UniversityProtos.Student studentAlfa = UniversityFactory.createStudent();
         return Response.ok(studentAlfa.toByteArray(),MediaType.APPLICATION_OCTET_STREAM).status(200).build();
     }
+
+
 /*
     @GET
     @Path("/subjects")

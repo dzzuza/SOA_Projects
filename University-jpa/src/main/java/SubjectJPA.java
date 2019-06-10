@@ -1,4 +1,5 @@
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -6,7 +7,7 @@ import java.util.Set;
 public class SubjectJPA {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "subject_id")
     int subjectid;
 
@@ -16,16 +17,16 @@ public class SubjectJPA {
     @Column(name = "ects")
     int ects;
 
-    public void setStudents(Set<StudentJPA> students) {
+    public void setStudents(List<StudentJPA> students) {
         this.students = students;
     }
 
-    public Set<StudentJPA> getStudents() {
+    public List<StudentJPA> getStudents() {
         return students;
     }
 
     @ManyToMany(mappedBy = "subjects")
-    private Set<StudentJPA> students;
+    private List<StudentJPA> students;
 
     @ManyToOne
     @JoinColumn(name = "profesor_id")

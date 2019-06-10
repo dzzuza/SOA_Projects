@@ -10,7 +10,7 @@ import java.util.Set;
 public class StudentJPA {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "student_id")
     private int studentid;
 
@@ -23,13 +23,13 @@ public class StudentJPA {
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "student_subject", joinColumns = {
             @JoinColumn(name = "student_id")}, inverseJoinColumns = {@JoinColumn(name = "subject_id")})
-    private Set<SubjectJPA> subjects;
+    private List<SubjectJPA> subjects;
 
 
     public StudentJPA() {
     }
 
-    public StudentJPA(Integer studentid, String name, String logo, Set<SubjectJPA> subjects) {
+    public StudentJPA(Integer studentid, String name, String logo, List<SubjectJPA> subjects) {
         this.studentid = studentid;
         this.name = name;
         this.logo=logo;
@@ -52,11 +52,11 @@ public class StudentJPA {
         this.name = name;
     }
 
-    public Set<SubjectJPA> getSubjects() {
+    public List<SubjectJPA> getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(Set<SubjectJPA> subjects) {
+    public void setSubjects(List<SubjectJPA> subjects) {
         this.subjects = subjects;
     }
 
